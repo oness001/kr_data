@@ -1,0 +1,14 @@
+numpy
+dash
+pandas
+dash_table
+dash_html_components
+dash_core_components
+flask_apscheduler
+flask
+plotly
+https://download.lfd.uci.edu/pythonlibs/w4tscw6k/TA_Lib-0.4.19-cp37-cp37m-win_amd64.whl
+baostock
+gevent
+git+https://github.com/hadrianl/KRData.git@master#egg=KRData
+mongoengine

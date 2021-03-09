@@ -1,0 +1,538 @@
+from numba import jit,int64,float32
+import numpy as np
+import time
+import talib
+from datetime import timedelta
+import pandas as pd
+import traceback
+from multiprocessing import Pool, cpu_count  # , Manager
+import time, datetime, os
+from numba_策略开发.画图工具.echart_可加参数 import draw_charts,only_line,draw_line_charts
+from numba_策略开发.回测工具.统计函数 import cal_tongji, cal_per_pos, huice_hsi
+from numba_策略开发.功能工具.功能函数 import transfer_to_period_data, get_local_hsi_csv,transfer_period_anydata
+
+
+'''
+将止损改为移动止损，方式为：固定移动跟踪止损。
+'''
+np.seterr(divide='ignore',invalid='ignore')
+
+pd_display_rows = 10
+pd_display_cols = 100
+pd_display_width = 1000
+pd.set_option('display.max_rows', pd_display_rows)
+pd.set_option('display.max_columns', pd_display_cols)
+pd.set_option('display.width', pd_display_width)
+pd.set_option('display.max_colwidth', pd_display_width)
+pd.set_option('display.unicode.ambiguous_as_wide', True)
+pd.set_option('display.unicode.east_asian_width', True)
+pd.set_option('expand_frame_repr', False)
+pd.set_option('expand_frame_repr', False)  # 当列太多时不换行
+pd.set_option('display.max_rows', 20000)
+pd.set_option('display.float_format', lambda x: '%.3f' % x)
+
+
+
+@jit(nopython=True)
+def cal_signal_(df0, df1, df2, strat_time, end_time, cs0):
+    '''
+    # df0 == 原始time，ohlcc,:np.array ：['candle_begin_time', 'open', 'high', 'low', 'close', 'volume', 'days', 'huors', 'minutes']
+    # df1 == 信号统计数据列:np.array ：['candle_begin_time','signal', 'pos', 'opne_price', 'per_lr', 'sl']
+    # df2 == 指标列:np.array
+    '''
+    # 配置参数
+    da,zhong,xiao,stop_n,max_stop_win ,rsi_n= cs0
+    # 配置临时变量
+    open_pos_size = 1
+    max_log_high = np.nan
+    min_log_low = np.nan
+    stop_loss_price = np.nan
+    for i in range(2,df0.shape[0]):#类似于vnpy:on_bar
+        # 交易时间判断：日：1-28，and （时，分：9：15-16：29）
+        # trading_time_con = ((df0[i, 7] == 9) and (df0[i, 8] >= 15)) or \
+        #                  ((df0[i, 7] == 16) and (df0[i, 8] <= 29)) or \
+        #                  ((df0[i, 7] > 9) and (df0[i, 7] < 16))
+
+        trading_time_con =True
+        # 交易所日盘，开放
+        if trading_time_con :
+            # 快捷变量
+            open_bar = df0[i][1]
+            high_bar = df0[i][2]
+            low_bar = df0[i][3]
+            last_close = df0[i - 1][4]
+            clsoe_bar = df0[i][4]
+            # === 仓位统计。
+            df1 ,now_open_prcie,now_pos = cal_per_pos(i,df1, open_pos_size, open_bar, clsoe_bar, last_close, sxf=1, slip=1)
+            # === 当日变量加载
+            max_log_high = max(high_bar, df2[i-1, 7])
+            min_log_low = min(low_bar, df2[i-1, 6])
+
+            ma_da = df2[i][1]
+            ma_da2 =df2[i-1][1]
+            ma_zhong = df2[i][2]
+            ma_zhong2 =df2[i-1][2]
+            ma_xiao = df2[i][3]
+            ma_xiao2 = df2[i-1][3]
+            hma_xiao = df2[i][8]
+            hma_xiao2 = df2[i-1][8]
+            rsi0 = df2[i][9]
+
+
+            if now_pos == 0:
+                long_condition =  (hma_xiao > ma_zhong)and(hma_xiao2 <=  ma_zhong2)
+                long_condition &= (ma_xiao > ma_zhong) and(rsi0>rsi_n)and(rsi0<75)
+                # long_condition &= (clsoe_bar > ma_zhong)and(last_close <= ma_zhong2) #突破中线
+                short_condition = False#(ma_xiao < ma_zhong) and (ma_zhong < ma_da)
+                if long_condition:
+                    df1[i][1] = 1 #buy signal
+                    max_log_high = high_bar
+                # 空：突破最低线。
+                elif short_condition :
+                    min_log_low = low_bar
+                    df1[i][1] = -1
+            elif now_pos > 0:
+                stop_loss_price = now_open_prcie-stop_n if (max_log_high-now_open_prcie < 80) else now_open_prcie + 20
+                stop_loss_con = (clsoe_bar < stop_loss_price) and (last_close >= stop_loss_price)
+                stop_win_con = ((max_log_high-now_open_prcie > max_stop_win))  and (clsoe_bar <ma_xiao) and (last_close>=ma_xiao2)
+                # close_pos = (ma_xiao == ma_zhong)
+                close_pos = ((ma_xiao < ma_zhong)) and (ma_xiao2 >= ma_zhong2)
+                if close_pos :
+                    df1[i][1] = 0
+                elif stop_loss_con:
+                    df1[i][1] = 0
+                elif stop_win_con:
+                    df1[i][1] = 0
+            elif now_pos < 0:
+                    stop_loss_price = min_log_low + stop_n
+                    stop_loss_con = (clsoe_bar > stop_loss_price) and (last_close <= stop_loss_price)
+                    stop_win_con = False#((clsoe_bar < stop_win_price)) and (last_close >= stop_win_price)
+                    close_pos = False#(clsoe_bar >me ) and (last_close <= me)
+                    if close_pos :
+                        df1[i][1] = 0
+                    elif stop_loss_con:
+                        df1[i][1] = 0
+                    elif stop_win_con:
+                        df1[i][1] = 0
+
+            # 记录指标 绘图等等
+            df2[i, 4] = stop_loss_price
+            df2[i, 6] = min_log_low
+            df2[i, 7] = max_log_high
+
+    res0 = cal_tongji(df_input=df1)
+    res0 = np.concatenate((res0,cs0))
+    return df0,df1,df2,res0
+
+def cal_signal(df,strat_time,end_time,cs0,ix_zong=100):
+    a = time.process_time()
+     # ===指标数据
+    # da, zhong, xiao, stop_n, max_stop_win = cs0
+    df['ma_da'] = talib.MA(df['close'],cs0[0])
+    df['ma_z'] = talib.MA(df['close'],cs0[1])
+    df['rsi'] = talib.RSI(df['close'],18)
+    df['ma_xiao'] = talib.MA(df['close'],cs0[2])
+    N = int(cs0[0])
+    X = 2 * talib.WMA(df['close'], int(N / 2)) - talib.WMA(df['close'], N)
+    df['hma'] = talib.WMA(X, int(N ** 0.5))
+    df['止损价'] = np.nan
+    df['止盈价'] = np.nan
+    df['日内最低价'] = 100000
+    df['日内最高价'] = 0
+    pass
+    # ===转化成np.array
+    df0cols = ['candle_begin_time', 'open', 'high', 'low', 'close', 'volume','days', 'huors', 'minutes']
+    df0 = df[df0cols].values
+    df1cols = ['candle_begin_time', 'signal', 'pos', 'opne_price', 'per_lr', 'sl']
+    df1 = df[df1cols].values
+    df2cols = ['candle_begin_time', 'ma_da', 'ma_z', 'ma_xiao', '止损价', '止盈价', '日内最低价', '日内最高价','hma','rsi']
+    df2 = df[df2cols].values
+    df0, df1, df2, res = cal_signal_(df0, df1, df2, strat_time, end_time, cs0)
+    print('runingtime:', time.process_time() - a, f's ,已经完成 ==:{round(ix_zong,2)}%')
+    # print(df0.shape, df1.shape, df2.shape,[df0cols,df1cols,df2cols], res)
+
+    # res=[0]
+    return df0, df1, df2,[df0cols,df1cols,df2cols], res
+
+def duojincheng_backtesting(df_input,zong_can,strat_time,end_time, cpu_nums=3):
+    df = df_input.copy()
+    if cpu_nums >cpu_count()-1:cpu_nums = cpu_count()-1
+    huice_df = []
+
+    def tianjia(res):
+        huice_df.append(res[-1])
+
+    def error_func(res):
+        print(res)
+    pass
+    #  ===原始数据处理
+    df['candle_begin_time'] = (df['candle_begin_time'] - np.datetime64(0, 's')) / timedelta(seconds=1)
+    df['days'] = pd.to_datetime(df["candle_begin_time"], unit='s').apply(lambda x: float(x.to_pydatetime().day))
+    df['huors'] = pd.to_datetime(df["candle_begin_time"], unit='s').apply(lambda x: float(x.to_pydatetime().hour))
+    df['minutes'] = pd.to_datetime(df["candle_begin_time"], unit='s').apply(lambda x: float(x.to_pydatetime().minute))
+    #  ===信号仓位统计数据列
+    df['signal'] = np.nan
+    df['pos'] = 0
+    df['opne_price'] = np.nan
+    df['per_lr'] = np.nan
+    df['sl'] = np.nan
+    # 多进程回测
+    zong_nums = len(zong_can) if len(zong_can)  > 0 else 1
+    if cpu_nums > 1:
+        p = Pool(processes=cpu_nums)
+        for j in range(0, zong_nums, cpu_nums):
+            for i in range(cpu_nums):
+                if j + i <= len(zong_can) - 1:
+                    canshu0 = zong_can[j + i]
+                    cs0 = np.array(canshu0)
+                    # cal_signal(df, strat_time, end_time, cs0)
+                    ix_zong = (j + i)*100/zong_nums
+
+                    p.apply_async(cal_signal, args=(df,strat_time,end_time,cs0,ix_zong,), callback = tianjia,error_callback=error_func,)
+                else:
+                    break
+        p.close()
+        p.join()
+        print('进程池joined')
+        # 整理多进程回测的数据
+
+        cols = ['最后收益', '最大收益', '模拟最大回撤', '赢撤率', '夏普率', '平均收益', '开仓次数', '胜率', '盈亏比']+[f'参数{i}' for i  in range(1,len(zong_can[-1])+1)]
+        resdf = pd.DataFrame(huice_df, columns=cols)
+        resdf = resdf[cols]
+        resdf.sort_values(by='最后收益', inplace=True)
+        print(resdf.iloc[-20:])
+        print(f'=参数回测结束,谢谢使用.')
+        return resdf,pd.DataFrame()
+    # 单进程测试
+    else:
+        for cs0 in zong_can:
+            a = time.process_time()
+            cs0 = np.array(cs0)
+            df0, df1, df2, cols, res0 = cal_signal(df, strat_time, end_time, cs0)
+            huice_df.append(res0)
+            # print('runingtime:', time.process_time() - a, 's')
+        df0cols, df1cols, df2cols = cols
+        # 转换成df数据
+        df00 = pd.DataFrame(df0, columns=df0cols)
+        df11 = pd.DataFrame(df1, columns=df1cols)
+        df22 = pd.DataFrame(df2, columns=df2cols)
+        #合并
+        df11_= pd.merge(df00, df11, on="candle_begin_time", suffixes=('_0', '_1'))
+        dfres = pd.merge(df11_, df22, on="candle_begin_time", suffixes=('', '_2'))
+        dfres["candle_begin_time"] = pd.to_datetime(dfres["candle_begin_time"], unit='s')
+        dfres.sort_values(by='candle_begin_time',inplace=True)
+        cols = ['最后收益', '最大收益', '模拟最大回撤', '赢撤率', '夏普率', '平均收益', '开仓次数', '胜率', '盈亏比'] + [f'参数{i}' for i in range(1, len(zong_can[-1]) + 1)]
+        res0 = pd.DataFrame(huice_df, columns=cols)
+        res0 = res0[cols]
+        res0.sort_values(by='最后收益', inplace=True)
+        print(f'=参数回测结束,谢谢使用.')
+        print(dfres.iloc[-20:])
+
+        return res0,dfres
+
+def zsy_bollin_01(data, para=[90, 2]):
+    df = data.copy()
+
+    time_rule_type = (df.iloc[1]['candle_begin_time'] - df.iloc[0]['candle_begin_time']).seconds / 60
+    str_t = str(int(time_rule_type))
+    dict_time_interval = {'15': 58, '30': 29, '60': 15, '120': 7, '240': 4}
+    n1 = int(para[0])
+
+    # n1 = para[0]
+    n2 = int(para[0])
+    p = para[1]
+
+    df['median'] = df['close'].rolling(window=n2).mean()
+    df['std'] = df['close'].rolling(n2, min_periods=1).std(ddof=0)  # ddof代表标准差自由度
+    df['z_score'] = abs(df['close'] - df['median']) / df['std']
+    df['m'] = df['z_score'].rolling(window=n2).mean()
+
+    # 计算动量因子趋势性因子
+
+    df['taker_buy_base_asset_volume'] = df['volume'].rolling(window=n2, min_periods=1).mean()
+    df['mtm_buy'] = df['taker_buy_base_asset_volume'] / df['taker_buy_base_asset_volume'].shift(n2) - 1
+    df['mtm_mean_buy'] = df['mtm_buy'].rolling(window=n2, min_periods=1).mean()
+
+    df['upper'] = df['median'] + df['std'] * df['m']* df['mtm_mean_buy']
+    df['lower'] = df['median'] - df['std'] * df['m'] * df['mtm_mean_buy']
+
+    df['scope'] = df['std'] * df['m'] * df['mtm_mean_buy']  # 布林带宽度
+
+    condition_long = df['high'] > df['upper'].shift(1)
+
+    # 将原来的condition_short 用布林带的宽度过滤
+    scope_condition = df['scope'] < df['scope'].rolling(n1).mean()
+    condition_short = df['low'] < df['lower'].shift(1)
+    condition_short = condition_short & scope_condition
+
+    df['mtm'] = df['close'] / df['close'].shift(n1) - 1
+    df['mtm_mean'] = df['mtm'].rolling(window=n1, min_periods=1).mean()
+
+    # 基于价格atr，计算波动率因子wd_atr
+    df['atr'] = talib.ATR(df['high'] , df['low'],df['close'],n1)
+    df['avg_price'] = df['close'].rolling(window=n1, min_periods=1).mean()
+    df['wd_atr'] = df['atr'] / df['avg_price']
+
+    # 参考ATR，对MTM指标，计算波动率因子
+    df['mtm_l'] = df['low'] / df['low'].shift(n1) - 1
+    df['mtm_h'] = df['high'] / df['high'].shift(n1) - 1
+    df['mtm_c'] = df['close'] / df['close'].shift(n1) - 1
+    df['mtm_atr'] = talib.ATR(df['mtm_l'] , df['mtm_h'],df['mtm_c'],n1)
+
+    # 参考ATR，对MTM mean指标，计算波动率因子
+    df['mtm_l_mean'] = df['mtm_l'].rolling(window=n1, min_periods=1).mean()
+    df['mtm_h_mean'] = df['mtm_h'].rolling(window=n1, min_periods=1).mean()
+    df['mtm_c_mean'] = df['mtm_c'].rolling(window=n1, min_periods=1).mean()
+    df['mtm_atr_mean'] = talib.ATR(df['mtm_l_mean'] , df['mtm_h_mean'],df['mtm_c_mean'],n1)
+
+    indicator = 'mtm_mean'
+
+    # mtm_mean指标分别乘以二个波动率因子
+
+    df[indicator] = df[indicator] * df['mtm_atr_mean']* df['wd_atr']
+
+    # 对新策略因子计算自适应布林
+    df['median'] = df[indicator].rolling(window=n1).mean()
+    df['std'] = df[indicator].rolling(n1, min_periods=1).std(ddof=0)  # ddof代表标准差自由度
+
+    # 增加交易量因子
+    df['volume_median'] = df['volume'].rolling(window=n1).mean()
+    df['volume_std'] = df['volume'].rolling(n1, min_periods=1).std(ddof=0)
+    df['z_score'] = abs(df[indicator] - df['median']) * abs(df['volume'] - df['volume_median']) / (
+            df['std'] * df['volume_std'])
+
+
+    df['z_score_square'] = pow(abs(df['z_score']), p)  # 计算z_score的p此方
+
+    # 计算z_score的p此方# z_score^p求和后开p次方，然后除以时间窗口的长度(即样本量)
+    df['m'] = (pow(df['z_score_square'].rolling(window=n1).sum(), (1 / p)) / n1).shift(1)
+
+    # df['m'] = df['z_score'].rolling(window=n1).min().shift(1)
+
+    df['up'] = df['median'] + df['std'] * df['m']
+    df['dn'] = df['median'] - df['std'] * df['m']
+
+    # 突破上轨做多
+    condition1 = df[indicator] > df['up']
+    condition2 = df[indicator].shift(1) <= df['up'].shift(1)
+
+    condition = condition1 & condition2
+    df.loc[condition, 'signal_long'] = 1
+
+    # 均线平仓(多头持仓)
+    condition1 = df[indicator] < df['median']
+    condition2 = df[indicator].shift(1) >= df['median'].shift(1)
+    condition = condition1 & condition2
+    df.loc[condition, 'signal_long'] = 0
+
+    # 突破下轨做空
+    condition1 = df[indicator] < df['dn']
+    condition2 = df[indicator].shift(1) >= df['dn'].shift(1)
+    condition = condition1 & condition2
+    df.loc[condition, 'signal_short'] = -1
+
+    # 均线平仓(空头持仓)
+    condition1 = df[indicator] > df['median']
+    condition2 = df[indicator].shift(1) <= df['median'].shift(1)
+    condition = condition1 & condition2
+    df.loc[condition, 'signal_short'] = 0
+
+    df.loc[condition_long, 'signal_short'] = 0
+    df.loc[condition_short, 'signal_long'] = 0
+
+    # ===由signal计算出实际的每天持有仓位
+    # signal的计算运用了收盘价，是每根K线收盘之后产生的信号，到第二根开盘的时候才买入，仓位才会改变。
+    df['signal_short'].fillna(method='ffill', inplace=True)
+    df['signal_long'].fillna(method='ffill', inplace=True)
+    df['signal'] = df[['signal_long', 'signal_short']].sum(axis=1)
+    df['signal'].fillna(value=0, inplace=True)
+    # df['signal'] = df[['signal_long', 'signal_short']].sum(axis=1, min_count=1,
+    #                                                         skipna=True)  # 若你的pandas版本是最新的，请使用本行代码代替上面一行
+    temp = df[df['signal'].notnull()][['signal']]
+    temp = temp[temp['signal'] != temp['signal'].shift(1)]
+    df['signal'] = temp['signal']
+
+    df.drop(['signal_long', 'signal_short', 'atr', 'z_score'], axis=1,
+            inplace=True)
+
+    return df
+
+
+if __name__ == '__main__':
+
+
+    filename = os.path.abspath(__file__).split('\\')[-1].split('.')[0]
+    timeer0 = datetime.datetime.fromtimestamp(time.time()).strftime('%m_%d=%H')
+    datapath = r'F:\task\恒生股指期货\hsi_data_1min\HSI2011-2019_12.csv'
+    dir_path = r'F:\task\恒生股指期货\numba_策略开发\all_day_tri_ma_min'
+
+    # 1.先测试单进程 cpu == 1
+    strat_time = np.array([1, 9, 20])
+    end_time = np.array([27, 16, 20])
+    a = 1
+    b = 10
+    c = 10
+
+    if True == a:
+        df_time_list = [['2019-10-10 09:15:00', '2019-12-10 16:25:00']]
+        s_time, e_time = df_time_list[0]
+        df =  get_local_hsi_csv(s_time, e_time, datapath)  # 获取本地数据
+        df000 = df.copy()
+        time0 = time.process_time()
+        df000 = df.copy()
+        df000['ma'] = talib.SMA(df000['close'], 5000)
+        # df000['ma2']=talib.MA(df000['close'],5000)
+        #[44.000 140.000 30.000 50.000 140.000]
+
+        df = zsy_bollin_01(df000, para=[90, 2])
+        print(df.tail())
+        huice_hsi(df, bzj=1 / 5, leverage_rate=1, c_rate=20, hycs=50, slip=1, min_margin_rate=(0.8), is_print=True)
+        exit()
+        res0 ,resdf = duojincheng_backtesting(df000, zong_can=[[40, 140, 30, 50.0,140,50]],
+                                              strat_time=strat_time,
+                                              end_time=end_time, cpu_nums=1)
+        # print(resdf[resdf['signal'] == -1])
+        print(resdf.tail(5))
+        print(res0)
+        mode = 3
+        if mode == 1:
+
+            # resdf.sort_values(by='candle_begin_time', inplace=True)
+            # ma_da  # ma_z # ma_xiao # 止损价 # 止盈价# 日内最低价# 日内最高价
+            print(resdf.iloc[-10:])
+            draw_charts(resdf, canshu={'opne_price': resdf['opne_price'],
+                                       '止损价': resdf['止损价'],
+                                       '止盈价': resdf['止盈价'],
+                                       '日内最低价': resdf['日内最低价'],
+                                       '日内最高价': resdf['日内最高价'],
+                                       'ma_da': resdf['ma_da'],
+                                       'ma_xiao': resdf['ma_xiao'],
+                                       'hma': resdf['hma'],
+                                       'ma_z': resdf['ma_z']
+                                       },canshu2={'rsi': resdf['rsi']}, vol_bar=True,
+                        path=r'html_gather\%s_%s' % (filename, timeer0),markline_show1=False,markline_show2=True)
+        if mode == 2:
+            draw_charts(resdf, canshu={'opne_price': resdf['opne_price'],
+                                       '止损价': resdf['止损价'],
+                                       '止盈价': resdf['止盈价'],
+                                       '日内最低价': resdf['日内最低价'],
+                                       '日内最高价': resdf['日内最高价'],
+                                       '小均线': resdf['小均线'],
+                                       '大均线': resdf['大均线'],
+                                       '移动止赢': resdf['移动止赢'],
+                                       "atr_day": resdf['atr_day']
+                                       }, vol_bar=True, markline_show2=True,
+                        path=r'html_gather\%s_%s' % (filename, timeer0))
+        # 只查看资金曲线和标的净值
+        if mode == 3:
+            resdf['per_lr'].fillna(0, inplace=True)
+            resdf['资金曲线'] = resdf['per_lr'].cumsum()
+            resdf['资金曲线'].fillna(method='ffill', inplace=True)
+            resdf['资金曲线2'] = resdf['资金曲线'].rolling(120).mean()
+            resdf['资金曲线'].fillna(method='bfill', inplace=True)
+            resdf['up'], resdf['ma'], resdf['dn'] = talib.BBANDS(resdf['close'], 3500, 3, 3)
+            # , '资金曲线', '资金曲线2'
+            only_line(resdf, zhibiaos=['dn', 'up', 'ma'],
+                      canshu=['资金曲线', '资金曲线2'],
+                      rule_type='1H', path='资金曲线test_%s.html' % (filename))
+
+            print(res0)
+        print(f'总时间：{time.process_time() - time0}  s')
+        exit()
+
+    # 多进程策略 :
+    # [190, 20, 2, 2]
+    if True == b:
+        # 40.000 150.000 20.000 50.000 140.000
+        canshu_list = []
+        for cs1 in range(30, 50, 10):
+            for cs2 in range(140, 160, 10):
+                for cs3 in range(10, 31, 10):
+                    for cs4 in range(45, 51, 5):
+                        for cs5 in range(130, 160, 10):
+                                for cs6 in range(40, 61, 5):
+                                    canshu_list.append([cs1, cs2, cs3, cs4,cs5,cs6])
+
+        canshu_list = canshu_list[:]
+        df_time_list = [['2016-1-10 09:15:00', '2019-12-20 16:25:00']]
+        s_time, e_time = df_time_list[0]
+        df =  get_local_hsi_csv(s_time, e_time, datapath)  # 获取本地数据
+        df000 = df.copy()
+
+        print('参数列表个数：', len(canshu_list))
+        time0 = time.process_time()
+        resdf = duojincheng_backtesting(df000, zong_can=canshu_list[:], strat_time=strat_time, end_time=end_time, cpu_nums=3)
+        print(resdf[0].tail(10))
+        resdf[0].to_csv(r'csv_gather\%s_%s_粗回测.csv' % (filename, timeer0))
+        print(f'总时间：{time.process_time() - time0}  s')
+
+    # 多进程策略 :
+    if True == c:
+        from numba_策略开发.回测工具.多阶段回测 import duojieduan_huice
+
+        canshu_list = []
+        for cs1 in range(180, 180, 10):
+            for cs2 in range(10, 25, 5):
+                for cs3 in range(2, 5, 1):
+                    for cs4 in range(2, 5, 1):
+                        for cs5 in range(3000, 5001, 1000):
+                            for cs6 in range(1, 3, 1):
+                                canshu_list.append([cs1, cs2, cs3, cs4, cs5, cs6])
+        canshu_list = canshu_list[:]
+        df_time_list = [['2016-1-10 09:15:00', '2019-12-28 16:25:00']]
+        s_time, e_time = df_time_list[0]
+        df =  get_local_hsi_csv(s_time, e_time, datapath)  # 获取本地数据
+        df000 = df.copy()
+        strat_time = np.array([1, 9, 30])
+        end_time = np.array([27, 16, 10])
+        name = f'{filename}_{s_time[:4]}_{e_time[:4]}'
+
+        if True == 1:
+            print('参数列表个数：', len(canshu_list))
+            time0 = time.process_time()
+            func_canshu = {'zong_can': canshu_list[:], 'cpu_nums': 2, "strat_time": strat_time, "end_time": end_time}
+            df_zong = duojieduan_huice(df, duojincheng_backtesting, func_canshu, s_time, e_time, jiange='12MS')
+            path_csv = dir_path + r'\csv_gather\%s.csv' % name
+            df_zong.to_csv(path_csv)
+            # 接下来生成html
+            df_zong_html = pd.DataFrame()
+            for k, v in df_zong.groupby('s_time'):
+                print(k)
+                dfv = pd.DataFrame(v)
+                dfv.sort_values('最后收益', ascending=False, inplace=True)
+                df0 = dfv.iloc[:50]
+                df_zong_html = df_zong_html.append(df0, ignore_index=True)
+            canshu_cols = [i for i in df_zong_html.keys() if '参数' in i]
+            df_zong_html['参数_合并'] = df_zong_html[canshu_cols].values.tolist()
+            df_zong_html['参数_合并'] = df_zong_html['参数_合并'].astype(str)
+            df0 = df_zong_html['参数_合并'].value_counts()  # .to_frame()
+            # df0.reset_index(inplace=True)
+            df_zong_html['参数出现次数'] = df_zong_html['参数_合并'].apply(lambda x: df0[x])
+
+            df_zong_html.set_index(keys=['s_time', '最后收益'], inplace=True)
+            html_path = dir_path + r'\策略介绍html\csv_html\%s.html' % name
+            df_zong_html.to_html(html_path)
+
+        # 读取本地数据,单独生成html，
+        if True == 0:
+            df_zong = pd.read_csv(dir_path + r'\csv_gather\%s.csv' % name)
+            df_zong_html = pd.DataFrame()
+            for k, v in df_zong.groupby('s_time'):
+                print(k)
+                dfv = pd.DataFrame(v)
+                dfv.sort_values('最后收益', ascending=False, inplace=True)
+                df0 = dfv.iloc[:50]
+                df_zong_html = df_zong_html.append(df0, ignore_index=True)
+            canshu_cols = [i for i in df_zong_html.keys() if '参数' in i]
+            df_zong_html['参数_合并'] = df_zong_html[canshu_cols].values.tolist()
+            df_zong_html['参数_合并'] = df_zong_html['参数_合并'].astype(str)
+
+            df0 = df_zong_html['参数_合并'].value_counts()  # .to_frame()
+            # df0.reset_index(inplace=True)
+            df_zong_html['参数出现次数'] = df_zong_html['参数_合并'].apply(lambda x: df0[x])
+
+            df_zong_html.set_index(keys=['s_time', '最后收益'], inplace=True)
+            name = 'max_突破06_atr_2015_2019.html'
+            html_path = dir_path + r'\策略介绍html\csv_html\%s.html' % name
+            df_zong_html.to_html(html_path)
+

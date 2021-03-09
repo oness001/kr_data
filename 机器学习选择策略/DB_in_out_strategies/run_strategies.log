@@ -1,0 +1,521 @@
+2020-11-10 19:33:15,184 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:15,289 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:15,290 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:15,291 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:15,292 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:15,292 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:15,301 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:15,301 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:15,302 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:15,302 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 93, in start
+    self._timer.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:15,302 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:15,303 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:20,093 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 131, in run_backtesting
+    raise e
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 79, in run_backtesting
+    ib_backtester.run_backtesting(**ss)
+  File "d:\programdata\vnpy\vnpy\app\ib_cta_backtester\engine.py", line 171, in run_backtesting
+    self.records_df = pd.DataFrame(engine.get_all_records())
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\frame.py", line 435, in __init__
+    arrays, columns = to_arrays(data, columns, dtype=dtype)
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 407, in to_arrays
+    coerce_float=coerce_float, dtype=dtype)
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 479, in _list_of_dict_to_arrays
+    content = list(lib.dicts_to_array(data, list(columns)).T)
+  File "pandas/_libs/lib.pyx", line 324, in pandas._libs.lib.dicts_to_array
+MemoryError
+"""
+
+The above exception was the direct cause of the following exception:
+
+MemoryError
+2020-11-10 19:33:20,324 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:20,324 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:21,404 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 131, in run_backtesting
+    raise e
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 79, in run_backtesting
+    ib_backtester.run_backtesting(**ss)
+  File "d:\programdata\vnpy\vnpy\app\ib_cta_backtester\engine.py", line 171, in run_backtesting
+    self.records_df = pd.DataFrame(engine.get_all_records())
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\frame.py", line 435, in __init__
+    arrays, columns = to_arrays(data, columns, dtype=dtype)
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 407, in to_arrays
+    coerce_float=coerce_float, dtype=dtype)
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 479, in _list_of_dict_to_arrays
+    content = list(lib.dicts_to_array(data, list(columns)).T)
+  File "pandas/_libs/lib.pyx", line 324, in pandas._libs.lib.dicts_to_array
+MemoryError
+"""
+
+The above exception was the direct cause of the following exception:
+
+MemoryError
+2020-11-10 19:33:22,429 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 131, in run_backtesting
+    raise e
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 79, in run_backtesting
+    ib_backtester.run_backtesting(**ss)
+  File "d:\programdata\vnpy\vnpy\app\ib_cta_backtester\engine.py", line 171, in run_backtesting
+    self.records_df = pd.DataFrame(engine.get_all_records())
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\frame.py", line 435, in __init__
+    arrays, columns = to_arrays(data, columns, dtype=dtype)
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 407, in to_arrays
+    coerce_float=coerce_float, dtype=dtype)
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 479, in _list_of_dict_to_arrays
+    content = list(lib.dicts_to_array(data, list(columns)).T)
+  File "pandas/_libs/lib.pyx", line 324, in pandas._libs.lib.dicts_to_array
+MemoryError
+"""
+
+The above exception was the direct cause of the following exception:
+
+MemoryError
+2020-11-10 19:33:23,446 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 131, in run_backtesting
+    raise e
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 79, in run_backtesting
+    ib_backtester.run_backtesting(**ss)
+  File "d:\programdata\vnpy\vnpy\app\ib_cta_backtester\engine.py", line 171, in run_backtesting
+    self.records_df = pd.DataFrame(engine.get_all_records())
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\frame.py", line 435, in __init__
+    arrays, columns = to_arrays(data, columns, dtype=dtype)
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 407, in to_arrays
+    coerce_float=coerce_float, dtype=dtype)
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 479, in _list_of_dict_to_arrays
+    content = list(lib.dicts_to_array(data, list(columns)).T)
+  File "pandas/_libs/lib.pyx", line 324, in pandas._libs.lib.dicts_to_array
+MemoryError
+"""
+
+The above exception was the direct cause of the following exception:
+
+MemoryError
+2020-11-10 19:33:25,521 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 131, in run_backtesting
+    raise e
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 79, in run_backtesting
+    ib_backtester.run_backtesting(**ss)
+  File "d:\programdata\vnpy\vnpy\app\ib_cta_backtester\engine.py", line 171, in run_backtesting
+    self.records_df = pd.DataFrame(engine.get_all_records())
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\frame.py", line 435, in __init__
+    arrays, columns = to_arrays(data, columns, dtype=dtype)
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 407, in to_arrays
+    coerce_float=coerce_float, dtype=dtype)
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 481, in _list_of_dict_to_arrays
+    coerce_float=coerce_float)
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 501, in _convert_object_array
+    arrays = [convert(arr) for arr in content]
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 501, in <listcomp>
+    arrays = [convert(arr) for arr in content]
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 497, in convert
+    arr = lib.maybe_convert_objects(arr, try_float=coerce_float)
+  File "pandas/_libs/lib.pyx", line 1976, in pandas._libs.lib.maybe_convert_objects
+MemoryError
+"""
+
+The above exception was the direct cause of the following exception:
+
+MemoryError
+2020-11-10 19:33:26,521 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 131, in run_backtesting
+    raise e
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 79, in run_backtesting
+    ib_backtester.run_backtesting(**ss)
+  File "d:\programdata\vnpy\vnpy\app\ib_cta_backtester\engine.py", line 171, in run_backtesting
+    self.records_df = pd.DataFrame(engine.get_all_records())
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\frame.py", line 435, in __init__
+    arrays, columns = to_arrays(data, columns, dtype=dtype)
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 407, in to_arrays
+    coerce_float=coerce_float, dtype=dtype)
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 481, in _list_of_dict_to_arrays
+    coerce_float=coerce_float)
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 501, in _convert_object_array
+    arrays = [convert(arr) for arr in content]
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 501, in <listcomp>
+    arrays = [convert(arr) for arr in content]
+  File "D:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals\construction.py", line 497, in convert
+    arr = lib.maybe_convert_objects(arr, try_float=coerce_float)
+  File "pandas/_libs/lib.pyx", line 1975, in pandas._libs.lib.maybe_convert_objects
+MemoryError
+"""
+
+The above exception was the direct cause of the following exception:
+
+MemoryError
+2020-11-10 19:33:26,571 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:26,572 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:26,572 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:26,588 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:26,601 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 93, in start
+    self._timer.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread
+2020-11-10 19:33:26,613 - run_strategies.py[line:146] - ERROR: ²ßÂÔÖ´ÐÐ´íÎó
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "D:\ProgramData\Anaconda3\lib\multiprocessing\pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "F:\new_0811\DB_in_out_strategies\run_strategies.py", line 72, in run_backtesting
+    ib_backtester.event_engine.start()
+  File "d:\programdata\vnpy\vnpy\event\engine.py", line 92, in start
+    self._thread.start()
+  File "D:\ProgramData\Anaconda3\lib\threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+"""
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError: can't start new thread

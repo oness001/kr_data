@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+    <title>策略变化01</title>
+</head>
+
+<body>
+<div id="h00" style="background-color:#FFFFFF;height:300px;width:1400px;float:buttom;">
+        <h1 style="text-align:center;background-color:#F009F0;">直接突破01策略变化</h1>
+        <p style="text-align:center;color:#AAFF00;">
+        止损：方式。<br>
+        &nbsp&nbsp 分别为：1，固定止损---2，atr止损---3，前高止损<br>
+        </p>
+        <p style="text-align:center;color:#AA0000;">
+         止赢：方式。<br>
+        &nbsp&nbsp 分别为：1，固定止赢---2，分阶段的跟踪止盈，---3，atr跟踪止赢<br>
+        &nbsp&nbsp 分别为：4，加速止赢---5，低位ma止盈<br>
+        <a style="background-color:#AAEFAE;font-size:20px" href="02.max_突破_做空策略01介绍.html"><br><br>返回主页<br><br></a>
+        </p>
+
+</div>
+
+<div id="空白" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content1" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+<h2>&nbsp&nbsp 直接突破01_atr<br>&nbsp&nbsp&nbsp&nbsp atr止损,改进思路：</h2>
+        <p style = "color:#FF00FF;">
+        1.atr止损 +2.固定止赢<br>
+        &nbsp &nbsp 开仓线，向上设置一个n*atr为止损线<br>
+        &nbsp &nbsp 同时建立对应的止盈line<br><br>
+        <a style="background-color:#AAEFAE;font-size:20px" target="_blank"
+                        href="信号样式\直接突破02_atr_12_07=09_45.html"><br>信号样式<br></a>
+        <a style="background-color:#AAEFAE;font-size:20px" target="_blank"
+           href="csv_html\直接突破01_atr_固定_2016_2019.html"><br><br>2016-2019回测结果查看<br><br></a>
+        </p>
+</div>
+<div id="空白2" style="text-align:center;background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content2" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+<h2>&nbsp&nbsp 直接突破01_固定<br>&nbsp&nbsp&nbsp&nbsp 固定止损,改进思路：</h2>
+          <p style = "color:#FF00FF;">
+        1.固定止损 +2.固定止赢<br>
+        &nbsp &nbsp 开仓线，向上设置一个n*atr为止损线<br>
+        &nbsp &nbsp 同时建立对应的止盈line<br><br>
+        <a style="background-color:#AAEFAE;font-size:20px" target="_blank"
+                        href="信号样式\直接突破02_固定__12_07=09_45.html"><br>信号样式<br></a>
+        <a style="background-color:#AAEFAE;font-size:20px" target="_blank"
+           href="csv_html\直接突破02_固定_2016_2019.html"><br><br>2016-2019回测结果查看<br><br></a>
+        </p>
+</div>
+<div id="空白3" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content3" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+<h2>&nbsp&nbsp 直接突破01_前高<br>&nbsp&nbsp&nbsp&nbsp 固定止损,改进思路：</h2>
+          <p style = "color:#FF00FF;">
+        1.max（前高，（固定））止损 +2.固定止赢<br>
+        &nbsp &nbsp 开仓线，向上设置一个n*atr为止损线<br>
+        &nbsp &nbsp 同时建立对应的止盈line<br><br>
+        <a style="background-color:#AAEFAE;font-size:20px" target="_blank"
+                        href="信号样式\直接突破03_前高_12_07=10_28.html"><br>信号样式<br></a>
+        <a style="background-color:#AAEFAE;font-size:20px" target="_blank"
+           href="csv_html\直接突破03_前高_2016_2019.html">2016-2019回测结果查看<br><br></a>
+        </p>
+</div>
+<div id="空白4" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+</div>
+<div id="空白5" style="background-color:#AEEFFE;height:500px;width:50px;float:buttom;">
+
+</div>
+<div id="空白6" style="position:relative;background-color:#AEEFFE;height:50px;width:1400px;float:buttom;">
+</div>
+<div id="空白7" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content4" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+<h2>&nbsp&nbsp 直接突破01_atr_移动止赢<br>&nbsp&nbsp&nbsp&nbsp 移动止赢,改进思路：</h2>
+          <p style = "color:#FF00FF;">
+        1.atr止损 +2.移动止赢<br>
+        &nbsp &nbsp 开仓线，向上设置一个n*atr为止损线，强制止损！<br>
+        &nbsp &nbsp 当价格close 不突破最大值止盈线，用ma+atr*n进行反向止盈（也会止损）<br>
+        &nbsp &nbsp 当价格close 突破最大值止盈线，用ma进行反向突破止盈<br><br>
+
+        <a style="background-color:#AAEFAE;font-size:20px" target="_blank"
+                        href="信号样式\直接突破01_atr_固定max_ma止盈_12_07=11_24.html"><br>信号样式<br></a>
+        <a style="background-color:#AAEFAE;font-size:20px" target="_blank"
+           href="csv_html\直接突破01_atr_固定max_ma止盈_2016_2019.html">2016-2019回测结果查看<br><br></a>
+          <a style="background-color:#AAEFAE;font-size:20px" target="_blank"
+       href="csv_html\直接突破01_atr_固定max_ma止盈_2016_2019_细粒度.html">2016_2019_细粒度,回测结果查看<br><br></a>
+           <a style="background-color:#AAEFAE;font-size:20px" target="_blank"
+       href="csv_html\直接突破01_atr_固定max_ma止盈_2016_2019_总体回测.html">2016_2019_总体回测,回测结果查看<br><br></a>
+        </p>
+
+</div>
+
+
+<div id="空白8" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content5" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+        <h2>&nbsp&nbsp 直接突破01_atr_固定max_ma止盈<br>&nbsp&nbsp&nbsp&nbsp 大周期择时 改进思路：</h2>
+          <p style = "color:#FF00FF;">
+                前置开仓条件：大周期择时。用close进行大周期的ma比较进行择时。
+                1.atr止损 +2.移动止赢<br>
+                &nbsp &nbsp 开仓线，向上设置一个n*atr为止损线，强制止损！<br>
+                &nbsp &nbsp 当价格close 不突破最大值止盈线，用ma+atr*n进行反向止盈（也会止损）<br>
+                &nbsp &nbsp 当价格close 突破最大值止盈线，用ma进行反向突破止盈<br><br>
+
+        <a style="background-color:#AAEFAE;font-size:20px" target="_blank"
+                        href="信号样式\直接突破01_atr_固定max_ma止盈+大周期择时_12_07=12_38.html"><br>信号样式<br></a>
+        <a style="background-color:#AAEFAE;font-size:20px" target="_blank"
+           href="csv_html\直接突破01_atr_固定max_ma止盈+大周期择时_2016_2019.html">2016-2019回测结果查看<br><br></a>
+        <a style="background-color:#AAEFAE;font-size:20px" target="_blank"
+           href="csv_html\直接突破01_atr_固定max_ma止盈+大周期择时_2016_2019_细粒度.html">2016-2019细粒度回测结果查看<br><br></a>
+          <a style="background-color:#AAEFAE;font-size:20px" target="_blank"
+           href="csv_html\直接突破01_atr_固定max_ma止盈+大周期择时_2016_2019_总体回测.html">2016_2019_总体回测,结果查看<br><br></a>
+        </p>
+</div>
+
+<div  style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+</div>
+<div id="content6" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+        <h2>&nbsp&nbsp 正在开发中<br>&nbsp&nbsp&nbsp&nbsp 。。。。。。</h2>
+          <p style = "color:#FF00FF;">
+
+
+<!--        <a style="background-color:#AAEFAE;font-size:20px" target="_blank"-->
+<!--                        href="信号样式\直接突破01_atr_固定max_ma止盈_12_07=11_24.html"><br>信号样式<br></a>-->
+<!--        <a style="background-color:#AAEFAE;font-size:20px" target="_blank"-->
+<!--           href="csv_html\直接突破01_atr_固定max_ma止盈_2016_2019.html"><br><br>2016-2019回测结果查看<br><br></a>-->
+        </p>
+</div>
+
+<div  style="background-color:#AEEFFE;height:500px;width:50px;float:buttom;">
+
+</div>
+<div  style="position:relative;background-color:#AEEFFE;height:50px;width:1400px;float:buttom;">
+</div>
+<div  style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+
+</body>
+
+</html>

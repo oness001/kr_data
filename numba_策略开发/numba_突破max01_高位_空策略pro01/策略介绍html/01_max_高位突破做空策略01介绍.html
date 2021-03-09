@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+    <title>numba_突破max01_空策略pro01</title>
+</head>
+<body>
+<h1 style="text-align:center;">numba_突破max01_空策略pro01</h1>
+<div id="空白0" style="background-color:#AEEFFE;height:50px;width:1400px;float:buttom;">
+</div>
+
+<div id="空白" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content1" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+<h2>&nbsp高位突破min_bd_01策略<br>&nbsp&nbsp&nbsp&nbsp策略介绍：</h2>
+<p>
+        开盘后close先会制造出高点和低点，为日内的最大值和最小值:<br>
+        inner_max,inner_min.  <br><br>
+        max_bd = inner_min + 一个固定日内最大波动值 <br><br>
+        当close反向下突破 max_bd 时开，空仓。 <br><br>
+        同时建立对应的止盈止损：stopwin，stop_loss。 <br><br>
+        <a style="background-color:#AAEFAE;font-size:20px" href="策略变化.html"><br><br>点击进入变化策略</a>
+
+</p>
+</div>
+<div id="空白2" style="text-align:center;background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content2" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+<h2>&nbsp&nbsp高位突破min_bd_02_策略<br>&nbsp&nbsp&nbsp&nbsp 策略的介绍：</h2>
+<p>
+        开盘后close先会制造出高点和低点，为日内的最大值和最小值:<br>
+        inner_max,inner_min.<br><br>
+        以inner_min + 一个固定的宽度为日内最大波动值 =  max_bd<br><br>
+        以inner_max为标准，向下波动xia_bd为条件1。<br><br>
+        当inner_max为标准大于max_bd时，同时满足条件1,开空仓。<br><br>
+        同时建立对应的止盈止损line<br><br>
+</p>
+</div>
+<div id="空白3" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content3" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+<h2>&nbsp&nbsp高位突破min_bd_03_策略<br>&nbsp&nbsp&nbsp&nbsp 策略的介绍：</h2>
+<p>
+        开盘后close先会制造出高点和低点，为日内的最大值和最小值:<br>
+        inner_max,inner_min.<br><br>
+        当close向下突破inner_min记录得到一个突破价tp_price.<br>
+
+        tp_price + 一个固定的宽度为日内最大波动值 =  max_bd<br><br>
+        close向下突破max_bd，开空仓。<br><br>
+        同时建立对应的止盈止损line<br><br>
+</p>
+</div>
+<div id="空白4" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+</div>
+<div id="空白5" style="background-color:#AEEFFE;height:500px;width:50px;float:buttom;">
+
+</div>
+<div id="空白6" style="position:relative;background-color:#AEEFFE;height:50px;width:1400px;float:buttom;">
+</div>
+<div id="空白7" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content4" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+<h2>&nbsp&nbsp开盘突破min_bd_01_策略<br>&nbsp&nbsp&nbsp&nbsp 策略的介绍：</h2>
+<p>
+        开盘后close先会制造出高点和低点，为日内的最大值和最小值:<br>
+        inner_max,inner_min.<br><br>
+        当close向下突破inner_min直接开仓，开空仓。<br>
+        同时建立对应的止盈止损line<br><br>
+        <p style="color:#FF0000;">
+        注释：对于开盘直接下跌，并且下跌不回头的情况，100%胜率！</p>
+</p>
+</div>
+
+
+<div id="空白8" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content5" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+        <h2>&nbsp&nbsp 开盘突破min_bd_&nbsp(02)_策略<br>&nbsp&nbsp&nbsp&nbsp 策略的介绍：</h2>
+        <p>
+        开盘后close先会制造出高点和低点，为日内的最大值和最小值:<br>
+        inner_max,inner_min.<br><br>
+        用inner_max - 一个波动值bd == min_bd<br>
+        当close向下突破min_bd直接开仓，开空仓。<br>
+        同时建立对应的止盈止损line<br><br>
+        <p style="color:#FF0000;">
+        注释：对于开盘直接下跌，并且下跌不回头的情况，100%胜率！</p>
+        </p>
+</div>
+
+
+<div id="空白9" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content6" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+
+</div>
+
+</body>
+</html>

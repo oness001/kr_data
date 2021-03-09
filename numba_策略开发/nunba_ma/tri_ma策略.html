@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+    <title>tri_ma策略</title>
+</head>
+<body>
+<h1 style="text-align:center;">tri_ma策略</h1>
+<div id="空白" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+</div>
+<div id="content1" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+<h2>&nbsp tri_ma策略01<br>&nbsp&nbsp&nbsp&nbsp策略介绍：</h2>
+<p>
+        计算三条均线：<br>
+        MA1,MA2,MA3 = (大中小) <br><br>
+        MA1，MA2定趋势！正趋势！方向 <br>
+        MA2，MA3，进行开平操作。<br>
+        当ma3 > ma2时，只要low破ma2，则买入一手多。 <br>
+        持多仓时，close跌破ma1，平仓。<br>
+        高位，破短线就卖出<br>
+        同时建立对应的止盈止损：stopwin，stop_loss。 <br><br>
+        <p style="color:#FF0000;">
+        注释：趋势为中期向上，金叉时，短期回调中期线，突破买入。<br>
+        在高位，容易直接打到ma3</p>
+</p>
+</div>
+
+<div id="空白2" style="text-align:center;background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content2" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+<h2>&nbsp tri_ma策略02<br>&nbsp&nbsp&nbsp&nbsp 策略的介绍：</h2>
+<p>
+        计算三条均线：<br>
+        MA1,MA2,MA3 = (大中小) <br><br>
+        MA1定趋势！趋势为正 <br>
+        MA2，MA3，进行开平操作。<br>
+        当ma3 > ma2时，只要low 触碰ma1，则买入一手多。<br>
+        持多仓时， MA2，MA3，死叉卖出。<br>
+        同时建立对应的止盈止损：stopwin，stop_loss。 <br>
+        注：此策略时抓正趋势，短期偏离杀跌，ma2，ma3，还没有死叉，
+        <br>在趋势发生时，形成黄金坑。高位也会被套，必须要有止损。
+</p>
+</div>
+<div id="空白3" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content3" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+<h2>&nbsp tri_ma策略03<br>&nbsp&nbsp&nbsp&nbsp 策略的介绍：</h2>
+<p>
+        计算三条均线：<br>
+        MA1,MA2,MA3 = (大中小) <br><br>
+        MA1定趋势！趋势为正 <br>
+        MA2，MA3，进行开平操作。<br>
+        当ma3 > ma2，ma2> ma1 ,<br>
+        且ma1 -ma2 >ma2-ma3，<br>
+        ,突破ma3，则买入一手多。<br>
+        持多仓时， MA2，MA3，死叉卖出。<br>
+        同时建立对应的止盈止损：stopwin，stop_loss。 <br>
+        注：此策略，正趋势，中期趋势走强，突破短期买入， <br>
+        在趋势已经发生，短期回调买入。走到高位末期，已经不具备买入条件。
+</p>
+</div>
+<div id="空白4" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="空白5" style="background-color:#AEEFFE;height:500px;width:50px;float:buttom;">
+
+</div>
+<div id="空白6" style="position:relative;background-color:#AEEFFE;height:50px;width:1400px;float:buttom;">
+</div>
+
+<div id="空白7" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content4" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+<h2>&nbsp tri_ma策略04<br>&nbsp高位三杀，策略介绍：</h2>
+<p>
+        计算三条均线：<br>
+        MA1,MA2,MA3 = (大中小) <br><br>
+        计算方向 <br>
+        MA1，MA2，MA3，同时拐头。且在高位<br>
+        当价格向下未偏离太远，则卖出一手空。 <br>
+        23金叉，平仓。<br>
+        同时建立对应的止盈止损：stopwin，stop_loss。 <br><br>
+        <p style="color:#FF0000;">
+        注释：趋势为中期向上，金叉时，短期回调中期线，突破买入。<br>
+        在高位，容易直接打到ma3</p>
+</p>
+</div>
+
+
+<div id="空白8" style="background-color:#AEEFFE;height:500px;width:50px;float:left;">
+
+</div>
+<div id="content5" style="text-align:center;background-color:#EEEEEE;height:500px;width:400px;float:left;">
+<h2>&nbsp&nbsp 开盘突破min_bd_&nbsp(02)_策略<br>&nbsp&nbsp&nbsp&nbsp 策略的介绍：</h2>
+<p>
+        开盘后close先会制造出高点和低点，为日内的最大值和最小值:<br>
+        inner_max,inner_min.<br><br>
+        用inner_max - 一个波动值bd == min_bd<br>
+        当close向下突破min_bd直接开仓，开空仓。<br>
+        同时建立对应的止盈止损line<br><br>
+        <p style="color:#FF0000;">
+        注释：对于开盘直接下跌，并且下跌不回头的情况，100%胜率！</p>
+</p>
+</div>
+
+</body>
+</html>
